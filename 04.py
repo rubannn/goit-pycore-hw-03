@@ -14,14 +14,30 @@ from datetime import datetime, date
 
 
 def get_upcoming_birthdays(users):
+    date_format = "%Y.%m.%d"
     result = []
     today = datetime.today().date()
     for user in users:
-        birthday = datetime.strptime(user["birthday"], "%Y.%m.%d").date()
+        name = user["name"]
+        birthday = datetime.strptime(user["birthday"], date_format).date()
         birthday_this_year = date(today.year, birthday.month, birthday.day)
+        birthday_next_year = date(today.year + 1, birthday.month, birthday.day)
         delta = (birthday_this_year - today).days
+        delta_next = (birthday_next_year - today).days
         if 0 <= delta <= 7:
-            result.append(user)
+            result.append(
+                {
+                    "name": name,
+                    "congratulation_date": birthday_this_year.strftime(date_format),
+                }
+            )
+        elif 0 <= delta_next <= 7:
+            result.append(
+                {
+                    "name": name,
+                    "congratulation_date": birthday_next_year.strftime(date_format),
+                }
+            )
     return result
 
 
