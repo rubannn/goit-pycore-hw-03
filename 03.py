@@ -15,7 +15,7 @@
 import re
 
 
-def normalize_phone(phone_number):
+def normalize_phone(phone_number: str) -> str:
     clear_phone_number = re.sub(r"[^0-9+]", "", phone_number)
     # if number is correct - return
     if re.fullmatch(r"\+380\d{9}", clear_phone_number):

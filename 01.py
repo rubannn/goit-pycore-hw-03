@@ -6,7 +6,7 @@
 from datetime import datetime
 
 
-def get_days_from_today(date):
+def get_days_from_today(date: str) -> int:
     date_format = "%Y-%m-%d"
     today = datetime.today()
     try:
